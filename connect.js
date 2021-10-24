@@ -75,20 +75,9 @@ MongoClient.connect(url, function (err, db) {
 //     if (err) throw err;
 //     var dbo = db.db(databaseName);
 //     var myobj = [
+////        just for reference(TO BE CHANGED)
 //         { mame: 'Jonn', address: 'Highway 71' },
-//         { name: 'Peter', address: 'Lowstreet 4' },
-//         { mame: 'Amy', address: 'Apple st 652' },
-//         { mame: 'Hannah', address: 'Mountain 21' },
-//         { mame: 'Michael', address: 'Valley 34' },
-//         { name: 'Sandy', address: 'Ocean blvd 2' },
-//         { mame: 'Betty', address: 'Green Grass 1' },
-//         { mame: 'Richard', address: 'Sky st 331' },
-//         { name: 'Susan', address: 'One way 98' },
-//         { name: 'Vicky', address: 'Yellow Garden 2' },
-//         { mame: 'Ben', address: 'Park Lane 38' },
-//         { name: "William', address: 'Central st 954" },
-//         { mame: 'Chuck', address: 'Main Road 989' },
-//         { mame: 'Viola', address: 'Sideway 1633' }
+//         { name: 'Peter', address: 'Lowstreet 4' }
 //     ];
 
 //     dbo.collection(collectionName).insertMany(myobj, function (err, res) {
