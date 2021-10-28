@@ -5,6 +5,6 @@ Username : B20113
 Password : 12345
 
 Run : 
-node app.js
+npm start
 OR
-nodemon app.js (if nodemon is installed)
+npm run startLive
