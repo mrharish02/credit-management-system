@@ -34,13 +34,13 @@ app.post("/login", function (req, res) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("Credit-Management");
-        dbo.collection("Password-Details").findOne({ username: req.body.username }, function (err, result) {
+        dbo.collection("Password-Details").findOne({ _id: req.body.username }, function (err, result) {
             if (err) throw "Not Found";
             if (result == null) {
                 console.log("Credentials Not found");
                 res.send("NOT FOUND");
             }
-            else if (req.body.password == result["password"]) {
+            else if (req.body.password == result["PASSWORD"]) {
                 console.log("Verified");
                 console.log(result);
                 res.send("Verified");
