@@ -43,7 +43,7 @@ app.post("/login", function (req, res) {
             else if (req.body.password == result["PASSWORD"]) {
                 console.log("Verified");
                 console.log(result);
-                res.send("Verified");
+                res.redirect("/courses");
             }
             else {
                 console.log("Invalid Details");
@@ -58,6 +58,11 @@ app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
 });
+
+app.get("/courses", function (req, res) {
+    console.log(req.body);
+    res.render("courses");
+})
 
 
 // Setting up the port and making it listen to requests
