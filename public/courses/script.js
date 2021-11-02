@@ -15,59 +15,59 @@ function SearchFun(){
         }
     }
 }
-function ADD(){
-    var tab1=document.getElementById("details");
-    var tab2=document.getElementById("display");
-    var check=document.getElementsByName("select");
-    for(var i=0; i<check.length; i++){
-        if(check[i].checked){
-            var ins=tab2.insertRow(tab2.length);
-            var r1=ins.insertCell(0);
-            var r2=ins.insertCell(1);
-            var r3=ins.insertCell(2);
-            var r4=ins.insertCell(3);
-            var r5=ins.insertCell(4);
+// function ADD(){
+//     var tab1=document.getElementById("details");
+//     var tab2=document.getElementById("display");
+//     var check=document.getElementsByName("select");
+//     for(var i=0; i<check.length; i++){
+//         if(check[i].checked){
+//             var ins=tab2.insertRow(tab2.length);
+//             var r1=ins.insertCell(0);
+//             var r2=ins.insertCell(1);
+//             var r3=ins.insertCell(2);
+//             var r4=ins.insertCell(3);
+//             var r5=ins.insertCell(4);
 
     
-            r1.innerHTML=tab1.rows[i+1].cells[0].innerHTML;
-            r2.innerHTML=tab1.rows[i+1].cells[1].innerHTML;
-            r3.innerHTML=tab1.rows[i+1].cells[2].innerHTML;
-            r4.innerHTML=tab1.rows[i+1].cells[3].innerHTML;
-            r5.innerHTML="<input type='checkbox'  name='drop'>";
+//             r1.innerHTML=tab1.rows[i+1].cells[0].innerHTML;
+//             r2.innerHTML=tab1.rows[i+1].cells[1].innerHTML;
+//             r3.innerHTML=tab1.rows[i+1].cells[2].innerHTML;
+//             r4.innerHTML=tab1.rows[i+1].cells[3].innerHTML;
+//             r5.innerHTML="<input type='checkbox'  name='drop'>";
 
-            var x=tab1.rows[i+1].rowIndex;
-            tab1.deleteRow(x);
-            i--;
+//             var x=tab1.rows[i+1].rowIndex;
+//             tab1.deleteRow(x);
+//             i--;
 
 
-        }
-    }
-}
-function DROP(){
-    var tab1=document.getElementById("details");
-    var tab2=document.getElementById("display");
-    var check=document.getElementsByName("drop");
-    for(var i=0; i<check.length; i++){
-        if(check[i].checked){
-            var ins=tab1.insertRow(tab1.length);
-            var r1=ins.insertCell(0);
-            var r2=ins.insertCell(1);
-            var r3=ins.insertCell(2);
-            var r4=ins.insertCell(3);
-            var r5=ins.insertCell(4);
+//         }
+//     }
+// }
+// function DROP(){
+//     var tab1=document.getElementById("details");
+//     var tab2=document.getElementById("display");
+//     var check=document.getElementsByName("drop");
+//     for(var i=0; i<check.length; i++){
+//         if(check[i].checked){
+//             var ins=tab1.insertRow(tab1.length);
+//             var r1=ins.insertCell(0);
+//             var r2=ins.insertCell(1);
+//             var r3=ins.insertCell(2);
+//             var r4=ins.insertCell(3);
+//             var r5=ins.insertCell(4);
 
     
-            r1.innerHTML=tab2.rows[i+1].cells[0].innerHTML;
-            r2.innerHTML=tab2.rows[i+1].cells[1].innerHTML;
-            r3.innerHTML=tab2.rows[i+1].cells[2].innerHTML;
-            r4.innerHTML=tab2.rows[i+1].cells[3].innerHTML;
-            r5.innerHTML="<input type='checkbox'  name='select1'>";
+//             r1.innerHTML=tab2.rows[i+1].cells[0].innerHTML;
+//             r2.innerHTML=tab2.rows[i+1].cells[1].innerHTML;
+//             r3.innerHTML=tab2.rows[i+1].cells[2].innerHTML;
+//             r4.innerHTML=tab2.rows[i+1].cells[3].innerHTML;
+//             r5.innerHTML="<input type='checkbox'  name='select1'>";
 
-            var x=tab2.rows[i+1].rowIndex;
-            tab2.deleteRow(x);
-            i--;
+//             var x=tab2.rows[i+1].rowIndex;
+//             tab2.deleteRow(x);
+//             i--;
 
 
-        }
-    }
-}
+//         }
+//     }
+// }

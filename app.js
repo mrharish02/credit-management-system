@@ -31,6 +31,7 @@ app.get("/login", function (req, res) {
 app.post("/login", function (req, res) {
     console.log("Username filled:", req.body.username);
     console.log("Password filled:", req.body.password);
+
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("Credit-Management");
@@ -54,15 +55,103 @@ app.post("/login", function (req, res) {
     });
 });
 
+
 app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
 });
 
+
+// Setting up the logic for displaying courses
+
+var courseIndex = 0;
+var courseSelected = [];
+var courseDisplay = [];
+
 app.get("/courses", function (req, res) {
-    console.log(req.body);
-    res.render("courses");
+
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("Credit-Management");
+        dbo.collection("Course-Details").find().toArray(function (err, result) {
+
+            courseDisplay = result.slice(courseIndex, courseIndex + 10);
+            db.close();
+            res.render("courses", { courseDisplay: courseDisplay, courseChosen: courseSelected });
+
+        });
+    });
+
+    // res.render("courses", {courseDisplay : courseDisplay});
+
+
 })
+
+
+app.post("/courses", function (req, res) {
+
+    console.log("Add or drop: " + req.body.add_drop);
+    console.log("selected to add: " + req.body.selected_to_add);
+    console.log("Selected to drop: " + req.body.selected_to_drop);
+
+    // logic for showing next and previous page courses
+    if (req.body.change == "prev") {
+
+        courseIndex = courseIndex - 10;
+
+    }
+    else if (req.body.change == "next") {
+
+        courseIndex = courseIndex + 10;
+
+    }
+
+    // logic for adding and dropping courses
+    if (req.body.add_drop == "Add") {
+        check = req.body.selected_to_add;
+
+        for (var i = 0; i < check.length; i++) {
+
+            courseSelected.push(courseDisplay[Number(check[i])]);
+
+        }
+    }
+
+    else if (req.body.add_drop == "drop") {
+        check = req.body.selected_to_drop;
+
+        // console.log(check);
+
+        if (typeof (check) != 'string') {
+            for (var i = 0; i < check.length; i++) {
+                for (var j = 0; j < courseSelected.length; j++) {
+                
+                    if (courseSelected[j]._id === check[i]) {
+
+                        courseSelected.splice(j, 1);
+
+                    }
+                }
+            }
+        } else if (typeof (check) == 'string') {
+
+            for (var j = 0; j < courseSelected.length; j++) {
+
+                if (courseSelected[j]._id === check) {
+
+                    courseSelected.splice(j, 1);
+
+                }
+            }
+        }
+    }
+
+    console.log("Selected Courses: " + courseSelected);
+    console.log("------------");
+    res.redirect("/courses");
+
+});
+
 
 
 // Setting up the port and making it listen to requests
