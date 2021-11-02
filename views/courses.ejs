@@ -1,135 +1,114 @@
 <html>
-    <body>
-        <head>
-            <title>PROJECT</title>
-            <link rel="stylesheet" href="/courses/style.css">
-            <script src="/courses/script.js"></script>
-        </head>
-        
-    
+
+<body>
+
+    <head>
+        <title>PROJECT</title>
+        <link rel="stylesheet" href="/courses/style.css">
+        <script src="/courses/script.js"></script>
+    </head>
+
+    <!-- For searching of courses -->
     <div class="searching">
         <form>
             <label>search for course</label><br>
             <input type="text" name="course_id" id="inval" placeholder="Course_Code" onkeyup="SearchFun()">
             <input type="submit" name="search" value="search">
         </form>
-        
-    </div>
-    <table id="details">
-        <tr>
-           
-            <th>Course_Id</th>
-            <th>Course_Name</th>
-            <th>Semester</th>
-            <th>Credit</th>
-            <th>Select</th>
-            
-        </tr>
-        <tr>
-            
-            <td>CS202</td>
-            <td>DATA STRUCTURE AND ALGORITHM</td>
-            <td>3</td>
-            <td>4</td>
-            <td><input type="checkbox" id="select" name="select" ></td>
-            
-        </tr>
-        <tr>
-            
-            <td>CS207</td>
-            <td>APPLIED DATABASE PRACTICUM</td>
-            <td>3</td>
-            <td>2</td>
-            <td><input type="checkbox" id="select" name="select"></td>
-           
-        </tr>
-        <tr>
-            
-            <td>IC272</td>
-            <td>DATA SCIENCE 3</td>
-            <td>3</td>
-            <td>3</td>
-            <td><input type="checkbox" id="select" name="select"></td>
-            
-        </tr>
-        <tr>
-            
-            <td>IC240</td>
-            <td>MECHANICS OF RIGID BODY</td>
-            <td>3</td>
-            <td>3</td>
-            <td><input type="checkbox" id="select" name="select" ></td>
-            
-        </tr>
-        <tr>
-            
-            <td>IC260</td>
-            <td>SIGNAL AND SYSTEM</td>
-            <td>3</td>
-            <td>3</td>
-            <td><input type="checkbox" id="select" name="select" ></td>
-            
-        </tr>
-        <tr>
-            
-            <td>CS208</td>
-            <td>MATHEMATICAL FOUNDATION OF COMPUTER SCIENCE</td>
-            <td>3</td>
-            <td>4</td>
-            <td><input type="checkbox" id="select" name="select"></td>
-           
-        </tr>
-        <tr>
-            
-            <td>IC101p</td>
-            <td>REVERSE ENGINEERING</td>
-            <td>3</td>
-            <td>2</td>
-            <td><input type="checkbox" id="select" name="select"></td>
-            
-        </tr>
-        <tr>
-            
-            <td>IC152</td>
-            <td>COMPUTING AND DATA SCIENCE</td>
-            <td>2</td>
-            <td>4</td>
-            <td><input type="checkbox" id="select" name="select"></td>
-        </tr>
-        <tr>
-            
-            <td>HS342</td>
-            <td>GERMAN1</td>
-            <td>2</td>
-            <td>3</td>
-            <td><input type="checkbox" id="select" name="select"></td>
-            
-        </tr>
-        <tr>
-            
-            <td>IC161P</td>
-            <td>APPLIED ELECTRONICS LAB</td>
-            <td>2</td>
-            <td>2</td>
-            <td><input type="checkbox" id="select" name="select"></td>
-        </tr>
-    </table>
 
-    <br>
-    <input type="button" id="add" onclick="ADD()" value="Add">
-    <br><br><br>
-    <h>selected courses:</h>
-    <table id="display">
-        <tr>
-            
-            <th>Course_Id</th>
-            <th>Course_Name</th>
-            <th>Semester</th>
-            <th>Credit</th>
-            <th>Select</th>
-        </tr> 
-    </table>
-    <input type="button" id="drop" onclick="DROP()" value="drop">
-    </body>
+    </div>
     
+    <!-- Fetching Courses Data from Database -->
+    <form action="/courses" method="post">
+        <table id="details">
+
+            <tr>
+                <th>Course_Id</th>
+                <th>Course_Name</th>
+                <th>L-T-P-C</th>
+                <th>Credit</th>
+                <th>Select</th>
+            </tr>
+
+            <% for (var i=0; i < courseDisplay.length ; i++){ %>
+
+                <tr>
+
+                    <td>
+                        <%= courseDisplay[i]._id %>
+                    </td>
+                    <td>
+                        <%= courseDisplay[i].NAME %>
+                    </td>
+                    <td>
+                        <%= courseDisplay[i].LTPC %>
+                    </td>
+                    <td>
+                        <%= courseDisplay[i].CREDITS %>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="select" name="selected_to_add" value=<%=i %> >
+                    </td>
+
+                </tr>
+
+                <% } %>
+
+                    <!-- <form action="/courses" method="post"> -->
+                    <button type="submit" name="change" value="prev">Previous</button>
+                    <button type="submit" name="change" value="next">Next</button>
+                    <!-- </form> -->
+
+
+        </table>
+
+        <br>
+
+        <!-- <form action="/courses" method="post"> -->
+        <button type="submit" name="add_drop" id="add" value="Add">ADD</button>
+
+        <br><br><br>
+        <h>selected courses:</h>
+        <table id="display">
+            <tr>
+
+                <th>Course_Id</th>
+                <th>Course_Name</th>
+                <th>L-T-P-C</th>
+                <th>Credit</th>
+                <th>Select</th>
+
+            </tr>
+
+
+            <% for (var i=0; i < courseChosen.length ; i++){ %>
+
+                <tr>
+
+                    <td>
+                        <%= courseChosen[i]._id %>
+                    </td>
+                    <td>
+                        <%= courseChosen[i].NAME %>
+                    </td>
+                    <td>
+                        <%= courseChosen[i].LTPC %>
+                    </td>
+                    <td>
+                        <%= courseChosen[i].CREDITS %>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="select" name="selected_to_drop" value=<%=courseChosen[i]._id %> >
+                    </td>
+
+                </tr>
+
+                <% } %>
+
+        </table>
+        <button type="submit" name="add_drop" id="drop" value="drop">DROP</button>
+
+    </form>
+
+</body>
 </html>

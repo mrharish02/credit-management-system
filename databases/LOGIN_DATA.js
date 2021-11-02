@@ -1,10 +1,5 @@
 const loginData= [
     {
-        "_id": "RollNo",
-        "NAME": "STUDENT NAME",
-        "PASSWORD": "12345"
-    },
-    {
         "_id": "A20001",
         "NAME": "AKASH SHARMA",
         "PASSWORD": "12345"
