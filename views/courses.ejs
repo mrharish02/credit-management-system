@@ -9,6 +9,7 @@
     </head>
 
     <!-- For searching of courses -->
+    <h1>Welcome <%= name %></h1>
     <div class="searching">
         <form>
             <label>search for course</label><br>
@@ -17,7 +18,6 @@
         </form>
 
     </div>
-    
     <!-- Fetching Courses Data from Database -->
     <form action="/courses" method="post">
         <table id="details">
@@ -107,7 +107,10 @@
 
         </table>
         <button type="submit" name="add_drop" id="drop" value="drop">DROP</button>
-
+        <br>
+        <br>
+        <button type="submit" name="submit" id="submit" value="submit">Submit</button>
+        <h1><%= message %></h1>
     </form>
 
 </body>

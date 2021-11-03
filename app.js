@@ -18,6 +18,13 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 
+var courseIndex = 0;
+var courseSelected = [];
+var courseDisplay = [];
+var username = ""
+var person_name = ""
+var initial_num_of_courses = 0;
+var message = "Add New Courses"
 // Setting up the logic of authentication and display page
 app.get("/", function (req, res) {
     res.render("index");
@@ -28,6 +35,26 @@ app.get("/login", function (req, res) {
     res.render("login");
 })
 
+function fetchSelectedCourses(username)
+{
+    console.log(username)
+    username=String(username);
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("Credit-Management");
+        dbo.collection("Student-Course-Info").findOne({ _id: username }, function (err, result) {
+            if (err) throw "Not Found";
+            if(result!=null)
+            {
+                var courses = result["Selected_Courses"];
+                for (var i=0;i<courses.length;i++)
+                    courseSelected.push(courses[i]);
+                initial_num_of_courses=courses.length;
+            }
+            db.close();
+        });
+    });
+}
 app.post("/login", function (req, res) {
     console.log("Username filled:", req.body.username);
     console.log("Password filled:", req.body.password);
@@ -44,6 +71,11 @@ app.post("/login", function (req, res) {
             else if (req.body.password == result["PASSWORD"]) {
                 console.log("Verified");
                 console.log(result);
+                courseSelected=[];
+                message="Add New Courses";
+                fetchSelectedCourses(req.body.username);
+                username = req.body.username;
+                person_name = result["NAME"];
                 res.redirect("/courses");
             }
             else {
@@ -64,12 +96,8 @@ app.get("/logout", function (req, res) {
 
 // Setting up the logic for displaying courses
 
-var courseIndex = 0;
-var courseSelected = [];
-var courseDisplay = [];
 
 app.get("/courses", function (req, res) {
-
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("Credit-Management");
@@ -77,7 +105,7 @@ app.get("/courses", function (req, res) {
 
             courseDisplay = result.slice(courseIndex, courseIndex + 10);
             db.close();
-            res.render("courses", { courseDisplay: courseDisplay, courseChosen: courseSelected });
+            res.render("courses", { courseDisplay: courseDisplay, courseChosen: courseSelected,name:person_name,message:message });
 
         });
     });
@@ -109,43 +137,105 @@ app.post("/courses", function (req, res) {
     // logic for adding and dropping courses
     if (req.body.add_drop == "Add") {
         check = req.body.selected_to_add;
-
-        for (var i = 0; i < check.length; i++) {
-
-            courseSelected.push(courseDisplay[Number(check[i])]);
-
+        if(check!=null)
+        {
+            for (var i = 0; i < check.length; i++) {
+                var p= true;
+                if(courseSelected!=null)
+                {
+                    for(var j=0;j<courseSelected.length;j++)
+                    {
+                        if(courseSelected[j]["_id"]==courseDisplay[Number(check[i])]["_id"])
+                        {
+                            p=false;
+                            break;
+                        }
+                    }
+                }
+                console.log(p);
+                if(p==true)
+                {
+                    courseSelected.push(courseDisplay[Number(check[i])]);
+                }
+            }
         }
     }
 
     else if (req.body.add_drop == "drop") {
         check = req.body.selected_to_drop;
 
-        // console.log(check);
-
-        if (typeof (check) != 'string') {
-            for (var i = 0; i < check.length; i++) {
-                for (var j = 0; j < courseSelected.length; j++) {
-                
-                    if (courseSelected[j]._id === check[i]) {
-
-                        courseSelected.splice(j, 1);
-
+        if(check!=null)
+        {
+            if (typeof (check) != 'string') {
+                for (var i = 0; i < check.length; i++) {
+                    for (var j = 0; j < courseSelected.length; j++) {
+                    
+                        if (courseSelected[j]._id === check[i]) {
+    
+                            courseSelected.splice(j, 1);
+    
+                        }
                     }
                 }
-            }
-        } else if (typeof (check) == 'string') {
-
-            for (var j = 0; j < courseSelected.length; j++) {
-
-                if (courseSelected[j]._id === check) {
-
-                    courseSelected.splice(j, 1);
-
+            } else if (typeof (check) == 'string') {
+    
+                for (var j = 0; j < courseSelected.length; j++) {
+    
+                    if (courseSelected[j]._id === check) {
+    
+                        courseSelected.splice(j, 1);
+    
+                    }
                 }
             }
         }
     }
 
+    else if(req.body.submit == "submit")
+    {
+        MongoClient.connect(url, function (err, db) {
+            if (err) throw err;
+            var dbo = db.db("Credit-Management");
+            var total_credits= Number(0);
+            for(var i=0;i<courseSelected.length;i++)
+            {
+                total_credits+=Number(courseSelected[i].CREDITS);
+            }
+            console.log(total_credits);
+            if(total_credits<=23)
+            {
+                if(initial_num_of_courses!=0)
+                {
+                    var newvalues = { $set: {Selected_Courses: courseSelected } };
+                    dbo.collection("Student-Course-Info").updateOne({_id : username}, newvalues, function(err, res) {
+                        if (err) throw err;
+                        console.log(res);
+                        db.close();
+                    });
+                    message = "Courses Updated Successfully!";
+                }
+                else
+                {
+                    var newvalues = [
+                        {
+                            "_id": username,
+                            "Selected_Courses":courseSelected
+                        }
+                    ]
+                    dbo.collection("Student-Course-Info").insertMany(newvalues, function(err,res){
+                        if (err) throw err;
+                        console.log(res);
+                        initial_num_of_courses = courseSelected.length;
+                        db.close();
+                    });
+                    message = "Courses Inserted Successfully!";
+                }
+            }
+            else
+                message="You can add upto 23 credits only.";
+            
+        });
+    }
     console.log("Selected Courses: " + courseSelected);
     console.log("------------");
     res.redirect("/courses");
