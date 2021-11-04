@@ -98,18 +98,25 @@ app.get("/logout", function (req, res) {
 
 
 app.get("/courses", function (req, res) {
-    MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbo = db.db("Credit-Management");
-        dbo.collection("Course-Details").find().toArray(function (err, result) {
+    if(username!="")
+    {
 
-            courseDisplay = result.slice(courseIndex, courseIndex + 10);
-            db.close();
-            res.render("courses", { courseDisplay: courseDisplay, courseChosen: courseSelected,name:person_name,message:message });
-
+        MongoClient.connect(url, function (err, db) {
+            if (err) throw err;
+            var dbo = db.db("Credit-Management");
+            dbo.collection("Course-Details").find().toArray(function (err, result) {
+    
+                courseDisplay = result.slice(courseIndex, courseIndex + 10);
+                db.close();
+                res.render("courses", { courseDisplay: courseDisplay, courseChosen: courseSelected,name:person_name,message:message });
+    
+            });
         });
-    });
-
+    }
+    else
+    {
+        res.render("index");
+    }
     // res.render("courses", {courseDisplay : courseDisplay});
 
 
