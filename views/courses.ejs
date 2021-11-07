@@ -5,7 +5,7 @@
     <head>
         <title>PROJECT</title>
         <link rel="stylesheet" href="/courses/style.css">
-        <script src="/courses/script.js"></script>
+        <!-- <script src="/courses/script.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
@@ -19,6 +19,7 @@
     </head>
 
     <!-- For searching of courses -->
+    <form action="/courses" method="post">
     <h2 class="top head">Credit Management System</h2>
     <div class="content">
         <h1 class="welcome">Welcome <%= name %>
@@ -28,19 +29,17 @@
             <button type="submit" class="btnsearch btnlogout" name="logout" id="logout" value="logout">Logout</button>
         </form>
         <div class="searching">
-            <form>
+            <!-- <form> -->
                 <div class="form-row col-md-4">
                     <label>Search For Course</label><br>
-                    <input class="form-control" type="text" name="course_id" id="inval" placeholder="Course_Code"
-                        onkeyup="SearchFun()">
+                    <input class="form-control" type="text" name="searchInput" id="inval" placeholder="Enter Course id" onkeyup="SearchFun()">
                 </div>
-                <input class="btnsearch" type="submit" name="search" value="Search">
-            </form>
-
+                <button class="btnsearch" type="submit" name="change" value="search" >Search</button>
+            <!-- </form> -->
 
         </div>
         <!-- Fetching Courses Data from Database -->
-        <form action="/courses" method="post">
+        
             <table class="table table-hover" id="details">
                 <thead class="thead-dark">
                     <tr>
@@ -77,6 +76,7 @@
 
                         <!-- <form action="/courses" method="post"> -->
                         <div class="coursenav">
+
                             <button class="btn btn-dark btn-sm btnnavv" type="submit" name="change"
                                 value="prev">Previous</button>
                             <button class="btn btn-dark btn-sm btnnavv" type="submit" type="submit" name="change"
