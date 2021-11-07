@@ -229,13 +229,35 @@ app.post("/courses", function (req, res) {
                             "Selected_Courses":courseSelected
                         }
                     ]
-                    dbo.collection("Student-Course-Info").insertMany(newvalues, function(err,res){
-                        if (err) throw err;
-                        console.log(res);
-                        initial_num_of_courses = courseSelected.length;
-                        db.close();
+                    var dbo = db.db("Credit-Management");
+                    var p=false;
+                    dbo.collection("Student-Course-Info").findOne({ _id: username }, function (err, result) {
+                        if (err) throw "Not Found";
+                        if(result!=null)
+                        {
+                            console.log("Hello");
+                            var newvalues = { $set: {Selected_Courses: courseSelected } };
+                            dbo.collection("Student-Course-Info").updateOne({_id : username}, newvalues, function(err, res) {
+                                if (err) throw err;
+                                console.log(res);
+                                db.close();
+                            });
+                            p=true;
+                            message = "Courses Updated Successfully!";
+                        }
                     });
-                    message = "Courses Inserted Successfully!";
+                    if(p==false)
+                    {
+                        dbo.collection("Student-Course-Info").insertMany(newvalues, function(err,res){
+                            if (err) throw err;
+                            console.log(res);
+                            initial_num_of_courses = courseSelected.length;
+                            db.close();
+                        });
+                        message = "Courses Inserted Successfully!";
+                    }
+                    else
+                        db.close();
                 }
             }
             else
