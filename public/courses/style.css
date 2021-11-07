@@ -85,42 +85,68 @@ table, th, td{border:1px solid black}
 
 /* buttons css */
 .btnsearch {
-    color: #FFFFFF;
-    font-family: Arial;
-    font-size: 16px;
-    font-weight: 100;
-    padding: 9px;
-    background-color: rgba(126, 69, 15, 0.993);
-    -webkit-box-shadow: 8px 4px 10px 0 #000000;
-    -moz-box-shadow: 8px 4px 10px 0 #000000;
-    box-shadow: 8px 4px 10px 0 #000000;
-    text-shadow: 2px 3px 0 #000000;
-    border: solid #000000 1px;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    text-align: center;
- }
- 
- .btnsearch:hover {
-    border: solid #440000 1px;
-    background: #613402;
-    text-decoration: none;
- }
+  align-items: center;
+  background-color: initial;
+  background-image: linear-gradient(#554e46, #411d05);
+  border-radius: 8px;
+  border-width: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .1),0 3px 6px rgba(0, 0, 0, .05);
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: expo-brand-demi,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 15px;
+  height: 35px;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 32px;
+  text-align: center;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all 150ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.btnsearch:hover {
+  box-shadow: rgba(117, 49, 4, 0.2) 0 2px 8px;
+  opacity: .85;
+}
+
+.btnsearch:active {
+  outline: 0;
+}
+
+.btnsearch:focus {
+  box-shadow: rgba(59, 6, 6, 0.5) 0 0 0 3px;
+}
+
+@media (max-width: 420px) {
+  .btnsearch {
+    height: 48px;
+  }
+}
+
 
  .btnsubmit{
     width: 25%;
     margin: auto;
+    border-radius: 6px;
     color: #FFFFFF;
     font-family: Arial;
     font-size: 20px;
     font-weight: 100;
     padding: 9px;
-    background-color: rgba(126, 69, 15, 0.993);
-    -webkit-box-shadow: 8px 4px 10px 0 #000000;
-    -moz-box-shadow: 8px 4px 10px 0 #000000;
-    box-shadow: 8px 4px 10px 0 #000000;
-    text-shadow: 2px 3px 0 #000000;
+    background-color: initial;
+    background-image: linear-gradient(#554e46, #411d05);
+    border-radius: 8px;
+    border-width: 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .1),0 3px 6px rgba(0, 0, 0, .05);
     border: solid #000000 1px;
     text-decoration: none;
     display: block;
@@ -128,9 +154,8 @@ table, th, td{border:1px solid black}
     text-align: center;
  }
  .btnsubmit:hover {
-    border: solid #440000 1px;
-    background: #613402;
-    text-decoration: none;
+    box-shadow: rgba(117, 49, 4, 0.2) 0 2px 8px;
+    opacity: .85;
  }
 
 /* .btnsearch, .btnsubmit {
@@ -164,7 +189,42 @@ table, th, td{border:1px solid black}
   }
 } */
 
-.btndrop {
+.btndrop, .btnlogout {
+  background: #b4332f;
+  border: 1px solid #b4332f;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 12px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.btndrop:hover,
+.btndrop:active, .btnlogout:hover,.btnlogout:active{
+  background-color: initial;
+  background-position: 0 0;
+  color: #b4332f;
+}
+
+.btndrop:active,.btnlogout:active {
+  opacity: .5;
+}
+/* .btndrop {
     color: #FFFFFF;
     font-family: Arial;
     font-size: 16px;
@@ -186,9 +246,9 @@ table, th, td{border:1px solid black}
     border: solid #000000 1px;
     background: #5f1919;
     text-decoration: none;
- }
+ } */
 
- .btnadd {
+ /* .btnadd {
     color: #FFFFFF;
     font-family: Arial;
     font-size: 16px;
@@ -210,4 +270,44 @@ table, th, td{border:1px solid black}
     border: solid #000000 1px;
     background: #0C5A0E;
     text-decoration: none;
- }
+ } */
+
+ .btnadd {
+    background: #048d04;
+    border: 1px solid #048d04;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 12px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+  }
+  
+  .btnadd:hover,
+  .btnadd:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #048d04;
+  }
+  
+  .btnadd:active {
+    opacity: .5;
+  }
+
+  .btnlogout{
+      float: right;
+  }
