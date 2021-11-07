@@ -19,6 +19,7 @@ app.use(expressSession({
 }));
 
 var courseIndex = 0;
+var loggedin = false;
 var courseSelected = [];
 var courseDisplay = [];
 var username = ""
@@ -27,13 +28,13 @@ var initial_num_of_courses = 0;
 var message = "Add New Courses"
 // Setting up the logic of authentication and display page
 app.get("/", function (req, res) {
+    if (loggedin) {
+        res.redirect("/courses");
+    }
+    else {
     res.render("index");
+    }
 });
-
-app.get("/login", function (req, res) {
-    console.log(req.body);
-    res.render("login");
-})
 
 function fetchSelectedCourses(username)
 {
@@ -70,6 +71,7 @@ app.post("/login", function (req, res) {
             }
             else if (req.body.password == result["PASSWORD"]) {
                 console.log("Verified");
+                loggedin = true;
                 console.log(result);
                 courseSelected=[];
                 message="Add New Courses";
@@ -88,8 +90,9 @@ app.post("/login", function (req, res) {
 });
 
 
-app.get("/logout", function (req, res) {
-    req.logout();
+app.post("/logout", function (req, res) {
+    console.log("Logging out");
+    loggedin = false;
     res.redirect("/");
 });
 
@@ -98,7 +101,7 @@ app.get("/logout", function (req, res) {
 
 
 app.get("/courses", function (req, res) {
-    if(username!="")
+    if(loggedin)
     {
 
         MongoClient.connect(url, function (err, db) {
@@ -115,7 +118,7 @@ app.get("/courses", function (req, res) {
     }
     else
     {
-        res.render("index");
+        res.redirect("/");
     }
     // res.render("courses", {courseDisplay : courseDisplay});
 
@@ -254,5 +257,5 @@ app.post("/courses", function (req, res) {
 // Setting up the port and making it listen to requests
 var port = process.env.PORT || 5000;
 app.listen(port, function () {
-    console.log("Server started on port:", port);
+    console.log("Server started at: http://localhost:" + String(port) + "/");
 });
