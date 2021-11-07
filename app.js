@@ -27,12 +27,7 @@ var initial_num_of_courses = 0;
 var message = "Add New Courses"
 // Setting up the logic of authentication and display page
 app.get("/", function (req, res) {
-    if (loggedin) {
-        res.redirect("/courses");
-    }
-    else {
     res.render("index");
-    }
 });
 
 app.get("/login", function (req, res) {
@@ -75,7 +70,6 @@ app.post("/login", function (req, res) {
             }
             else if (req.body.password == result["PASSWORD"]) {
                 console.log("Verified");
-                loggedin = true;
                 console.log(result);
                 courseSelected=[];
                 message="Add New Courses";
@@ -96,7 +90,6 @@ app.post("/login", function (req, res) {
 
 app.post("/logout", function (req, res) {
     console.log("Logging out");
-    loggedin = false;
     res.redirect("/");
 });
 
