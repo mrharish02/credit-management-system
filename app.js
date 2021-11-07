@@ -19,7 +19,6 @@ app.use(expressSession({
 }));
 
 var courseIndex = 0;
-var loggedin = false;
 var courseSelected = [];
 var courseDisplay = [];
 var username = ""
@@ -35,6 +34,11 @@ app.get("/", function (req, res) {
     res.render("index");
     }
 });
+
+app.get("/login", function (req, res) {
+    console.log(req.body);
+    res.render("login");
+})
 
 function fetchSelectedCourses(username)
 {
@@ -101,7 +105,7 @@ app.post("/logout", function (req, res) {
 
 
 app.get("/courses", function (req, res) {
-    if(loggedin)
+    if(username!="")
     {
 
         MongoClient.connect(url, function (err, db) {
@@ -118,7 +122,7 @@ app.get("/courses", function (req, res) {
     }
     else
     {
-        res.redirect("/");
+        res.render("index");
     }
     // res.render("courses", {courseDisplay : courseDisplay});
 
