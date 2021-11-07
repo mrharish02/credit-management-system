@@ -19,6 +19,7 @@ app.use(expressSession({
 }));
 
 var courseIndex = 0;
+var prev_courseIndex = courseIndex;
 var courseSelected = [];
 var courseDisplay = [];
 var username = ""
@@ -26,6 +27,8 @@ var person_name = ""
 var initial_num_of_courses = 0;
 var message = "Add New Courses"
 var message_password = "Update your password"
+var allCourses=[]
+
 
 
 // Setting up the logic of authentication and display page
@@ -42,7 +45,7 @@ app.get("/changePassword", function (req, res) {
     if (username != ""){
         res.render("change-password", { message_password: "Update your Password" });
     } else {
-        res.render("index");
+        res.render("index",{ message_login: ""});
     }
 })
 
@@ -161,6 +164,7 @@ app.get("/courses", function (req, res) {
             var dbo = db.db("Credit-Management");
             dbo.collection("Course-Details").find().toArray(function (err, result) {
 
+                allCourses=result;
                 courseDisplay = result.slice(courseIndex, courseIndex + 10);
                 db.close();
                 res.render("courses", { courseDisplay: courseDisplay, courseChosen: courseSelected, name: person_name, message: message });
@@ -169,7 +173,7 @@ app.get("/courses", function (req, res) {
         });
     }
     else {
-        res.render("index");
+        res.render("index",{ message_login: ""});
     }
     // res.render("courses", {courseDisplay : courseDisplay});
 
@@ -194,6 +198,28 @@ app.post("/courses", function (req, res) {
         courseIndex = courseIndex + 10;
 
     }
+
+    // logic for searching
+    else if(req.body.change == "search"){
+        searchInput=req.body.searchInput;
+        searchInput=searchInput.toUpperCase();
+        prev_courseIndex=courseIndex;
+        if(searchInput!=""){
+
+            
+            var indexSearch = allCourses.findIndex(x=>x._id.includes(searchInput) === true);
+            console.log(indexSearch)
+            if (indexSearch!=-1){
+                courseIndex = indexSearch;
+            }
+
+        } else if (searchInput = "")
+        {
+            courseIndex = prev_courseIndex;
+        }
+    }
+
+    console.log(req.body)
 
     // logic for adding and dropping courses
     if (req.body.add_drop == "Add") {
