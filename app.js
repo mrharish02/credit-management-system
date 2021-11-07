@@ -30,7 +30,7 @@ var message_password = "Update your password"
 
 // Setting up the logic of authentication and display page
 app.get("/", function (req, res) {
-    res.render("index");
+    res.render("index",{ message_login: ""});
 });
 
 app.get("/login", function (req, res) {
@@ -113,7 +113,8 @@ app.post("/login", function (req, res) {
             if (err) throw "Not Found";
             if (result == null) {
                 console.log("Credentials Not found");
-                res.send("NOT FOUND");
+                res.render("index",{ message_login: "Credentials Not found"});
+                
             }
             else if (req.body.password == result["PASSWORD"]) {
 
@@ -135,7 +136,7 @@ app.post("/login", function (req, res) {
             }
             else {
                 console.log("Invalid Details");
-                res.redirect("/");
+                res.render("index",{ message_login: "Invalid Details"});
             }
             db.close();
         });
