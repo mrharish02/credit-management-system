@@ -24,7 +24,7 @@ var courseDisplay = [];
 var username = ""
 var person_name = ""
 var initial_num_of_courses = 0;
-var message = "Add New Courses"
+var message = ""
 var message_password = "Update your password"
 
 
@@ -122,7 +122,7 @@ app.post("/login", function (req, res) {
                     console.log("Verified");
                     console.log(result);
                     courseSelected = [];
-                    message = "Add New Courses";
+                    message = "";
                     fetchSelectedCourses(req.body.username);
                     username = req.body.username;
                     person_name = result["NAME"];
