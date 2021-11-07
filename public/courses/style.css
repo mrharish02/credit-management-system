@@ -1,6 +1,213 @@
+body{
+    background-image: url('bgblur.jpg');
+    background-size: cover;
+    text-align: center;
+    margin: auto;
+}
+
+.top {
+    color: rgb(255, 255, 255);
+    border-radius: 25px;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(187,143,143,0.7) 5%, rgba(0,0,0,1) 100%);
+}
+
+h2.head {
+    padding: 2%;
+    color: aliceblue;
+    text-align: center;
+    margin-top: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+}
+
+.content{
+    border: 1px solid white;
+    width: auto;
+    background: rgba(255, 255, 255, 0.767);
+    padding: 2%;
+    width: 95%;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.welcome{
+    color: rgb(0, 0, 0);
+    text-transform: capitalize;
+    text-align: center;
+    /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.9) 100%); */
+    text-shadow: 2px 2px 5px #000000;
+    background-size: cover;
+    padding: 2%;
+    border-radius: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 3rem;
+}
+label{
+    font-size: 20px;
+    font-weight: 500;
+}
+.searching{
+    margin: auto;
+    padding-top: 2%;
+    margin-bottom: 7%;
+}
+
+.form-control{
+    margin-bottom: 15px;
+}
+
+.table{
+    background: white;
+    margin-top: 1%;
+}
+
+thead{
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+h3{
+    margin-top: 1%;
+}
+.message{
+    margin: auto;
+    margin-top: 2%;
+    text-align: center;
+}
+
 .div{
     background:black;
     height: 100px;
     width:250px;
 }
 table, th, td{border:1px solid black}
+
+/* buttons css */
+.btnsearch {
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: 100;
+    padding: 9px;
+    background-color: rgba(126, 69, 15, 0.993);
+    -webkit-box-shadow: 8px 4px 10px 0 #000000;
+    -moz-box-shadow: 8px 4px 10px 0 #000000;
+    box-shadow: 8px 4px 10px 0 #000000;
+    text-shadow: 2px 3px 0 #000000;
+    border: solid #000000 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+ }
+ 
+ .btnsearch:hover {
+    border: solid #440000 1px;
+    background: #613402;
+    text-decoration: none;
+ }
+
+ .btnsubmit{
+    width: 25%;
+    margin: auto;
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: 100;
+    padding: 9px;
+    background-color: rgba(126, 69, 15, 0.993);
+    -webkit-box-shadow: 8px 4px 10px 0 #000000;
+    -moz-box-shadow: 8px 4px 10px 0 #000000;
+    box-shadow: 8px 4px 10px 0 #000000;
+    text-shadow: 2px 3px 0 #000000;
+    border: solid #000000 1px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+ }
+ .btnsubmit:hover {
+    border: solid #440000 1px;
+    background: #613402;
+    text-decoration: none;
+ }
+
+/* .btnsearch, .btnsubmit {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btnsearch:hover, .btnsubmit:hover {
+  background-color: #fff;
+}
+
+
+@media (min-width: 768px) {
+  .btnsearch, .btnsubmit{
+    min-width: 120px;
+    padding: 0 25px;
+  }
+} */
+
+.btndrop {
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: 100;
+    padding: 9px;
+    background-color: rgba(156, 5, 5, 0.82);
+    -webkit-box-shadow: 8px 4px 10px 0 #000000;
+    -moz-box-shadow: 8px 4px 10px 0 #000000;
+    box-shadow: 8px 4px 10px 0 #000000;
+    text-shadow: 2px 3px 0 #000000;
+    border: solid #000000 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+ }
+ 
+ .btndrop:hover {
+    border: solid #000000 1px;
+    background: #5f1919;
+    text-decoration: none;
+ }
+
+ .btnadd {
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: 100;
+    padding: 9px;
+    background-color: rgba(12, 109, 52, 0.82);
+    -webkit-box-shadow: 8px 4px 10px 0 #000000;
+    -moz-box-shadow: 8px 4px 10px 0 #000000;
+    box-shadow: 8px 4px 10px 0 #000000;
+    text-shadow: 2px 3px 0 #000000;
+    border: solid #000000 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+ }
+ 
+ .btnadd:hover {
+    border: solid #000000 1px;
+    background: #0C5A0E;
+    text-decoration: none;
+ }
