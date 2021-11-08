@@ -36,7 +36,6 @@ h2.head {
     text-transform: capitalize;
     text-align: center;
     /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.9) 100%); */
-    text-shadow: 2px 2px 5px #000000;
     background-size: cover;
     padding: 2%;
     border-radius: 10px;
@@ -310,4 +309,9 @@ table, th, td{border:1px solid black}
 
   .btnlogout{
       float: right;
+  }
+  
+  #select:hover
+  {
+    cursor:pointer;
   }
