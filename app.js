@@ -157,8 +157,7 @@ app.post("/logout", function (req, res) {
 
 
 app.get("/courses", function (req, res) {
-    if (username != "") {
-
+    if (req.headers.referer != null && username!="") {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("Credit-Management");
