@@ -172,7 +172,7 @@ app.get("/courses", function (req, res) {
         });
     }
     else {
-        res.redirect("/");
+        res.render("index",{ message_login: ""});
     }
     // res.render("courses", {courseDisplay : courseDisplay});
 
